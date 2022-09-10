@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 import '../helper/colors.dart';
 
 class MyButton extends StatelessWidget {
-  const MyButton({Key? key}) : super(key: key);
+  final String buttonText;
+  final VoidCallback callBack;
+  const MyButton({required this.buttonText, required this.callBack});
 
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton.extended(
-      onPressed: () {},
-      label: const Text('Ajouter au panier'),
+      onPressed: callBack,
+      label: Text(buttonText),
       backgroundColor: AppColors.mainColor,
     );
   }

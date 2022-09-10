@@ -49,13 +49,19 @@ class ShopPage extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              const SizedBox(height: 10.0),
+              SizedBox(
+                height: (height -
+                        statusBar -
+                        kToolbarHeight -
+                        kBottomNavigationBarHeight) *
+                    0.01,
+              ),
               Container(
                 height: (height -
                         statusBar -
                         kToolbarHeight -
                         kBottomNavigationBarHeight) *
-                    0.10,
+                    0.1,
                 margin: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: TextField(
                   style: const TextStyle(fontSize: 12.0),
@@ -89,7 +95,13 @@ class ShopPage extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 20.0),
+              SizedBox(
+                height: (height -
+                        statusBar -
+                        kToolbarHeight -
+                        kBottomNavigationBarHeight) *
+                    0.05,
+              ),
               const ProductItems(),
             ],
           ),

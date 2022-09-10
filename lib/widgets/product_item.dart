@@ -7,16 +7,26 @@ class ProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-      elevation: 2.0,
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 10.0),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10.0),
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 0,
+              blurRadius: 4,
+              offset: const Offset(0, 0),
+            )
+          ]),
       child: GridTile(
         header: InkWell(
           onTap:
               () {}, // TODO: when the image is tap it should open the product detail page
           child: Container(
             width: double.infinity,
-            height: 100.0,
+            height: 120.0,
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(10.0),

@@ -13,10 +13,10 @@ class ProductItems extends StatelessWidget {
     return Container(
       height:
           (height - statusBar - kToolbarHeight - kBottomNavigationBarHeight) *
-              0.76,
+              0.78,
       width: double.maxFinite,
       child: GridView.builder(
-        padding: const EdgeInsets.symmetric(horizontal: 30.0),
+        padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 5.0),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           crossAxisSpacing: 10.0,

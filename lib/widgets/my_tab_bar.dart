@@ -37,14 +37,15 @@ class _MyTabBarState extends State<MyTabBar> with TickerProviderStateMixin {
           ),
         ),
         Container(
-          height: 180.0,
+          height: 190.0,
           width: double.maxFinite,
           child: TabBarView(
             controller: _tabController,
             children: [
               GridView.builder(
                 scrollDirection: Axis.vertical,
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   crossAxisSpacing: 10.0,

@@ -20,6 +20,8 @@ class _ProductDetailPageState extends State<ProductDetailPage>
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
 
+    void openPage() {}
+
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
@@ -89,7 +91,10 @@ class _ProductDetailPageState extends State<ProductDetailPage>
           ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: const MyButton(),
+        floatingActionButton: MyButton(
+          buttonText: 'Ajouter au panier',
+          callBack: openPage,
+        ),
       ),
     );
   }

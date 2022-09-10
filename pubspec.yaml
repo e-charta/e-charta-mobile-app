@@ -81,6 +81,7 @@ flutter:
     - assets/images/paper-cup.jpg
     - assets/images/paper-envelope.jpg
     - assets/images/piza-paper-box.jpg
+    - assets/images/Orange-Money-Logo.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

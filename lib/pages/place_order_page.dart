@@ -23,7 +23,7 @@ class _PlaceOrderPageState extends State<PlaceOrderPage> {
     keyboardType: TextInputType.text,
     cursorColor: AppColors.lightGrey,
     decoration: InputDecoration(
-      labelText: 'Telephone',
+      labelText: 'Téléphone',
       labelStyle: TextStyle(
         color: Colors.black.withOpacity(0.3),
         fontSize: 12.0,
@@ -53,7 +53,7 @@ class _PlaceOrderPageState extends State<PlaceOrderPage> {
     keyboardType: TextInputType.text,
     cursorColor: AppColors.lightGrey,
     decoration: InputDecoration(
-      labelText: 'Location',
+      labelText: 'Emplacement',
       labelStyle: TextStyle(
         color: Colors.black.withOpacity(0.3),
         fontSize: 12.0,
@@ -224,7 +224,7 @@ class _PlaceOrderPageState extends State<PlaceOrderPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Text(
-                            'Livrqison :',
+                            'Livraison :',
                             style: TextStyle(
                               fontSize: 12.0,
                               color: Colors.black.withOpacity(0.5),

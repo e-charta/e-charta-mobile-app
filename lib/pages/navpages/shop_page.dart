@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../helper/colors.dart';
-import '../../widgets/product_items.dart';
-import '../../widgets/shopping_cart.dart';
+import '../../widgets/shopPageWidgets/product_items.dart';
+import '../../widgets/shopPageWidgets/shopping_cart.dart';
 
 // enum FilterOptions {
 //   Historique,
@@ -33,12 +33,20 @@ class ShopPage extends StatelessWidget {
               ),
               itemBuilder: (_) => [
                 PopupMenuItem(
-                  child: const Text('Historique'),
+                  height: 35.0,
+                  child: const Text(
+                    'Historique',
+                    style: TextStyle(fontSize: 12.0),
+                  ),
                   // value: FilterOptions.Favorites,
                   onTap: () {},
                 ),
                 PopupMenuItem(
-                  child: const Text('Favori'),
+                  height: 35.0,
+                  child: const Text(
+                    'Favori',
+                    style: TextStyle(fontSize: 12.0),
+                  ),
                   // value: FilterOptions.All,
                   onTap: () {},
                 ),
@@ -102,7 +110,15 @@ class ShopPage extends StatelessWidget {
                         kBottomNavigationBarHeight) *
                     0.05,
               ),
-              const ProductItems(),
+              SizedBox(
+                height: (height -
+                        statusBar -
+                        kToolbarHeight -
+                        kBottomNavigationBarHeight) *
+                    0.84,
+                width: double.maxFinite,
+                child: const ProductItems(),
+              ),
             ],
           ),
         ),

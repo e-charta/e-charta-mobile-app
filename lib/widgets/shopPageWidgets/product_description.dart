@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../helper/colors.dart';
+import '../../helper/colors.dart';
 
 class ProductDescription extends StatelessWidget {
   const ProductDescription({Key? key}) : super(key: key);

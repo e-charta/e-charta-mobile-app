@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import './navpages/account_page.dart';
-import 'navpages/recycling_page.dart';
+import 'navpages/pickup_page.dart';
 import './navpages/statistics_page.dart';
 import './navpages/shop_page.dart';
 import '../helper/colors.dart';

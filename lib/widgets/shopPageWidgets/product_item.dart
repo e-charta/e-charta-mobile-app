@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../helper/colors.dart';
+import '../../helper/colors.dart';
 
 class ProductItem extends StatelessWidget {
   const ProductItem({Key? key}) : super(key: key);
@@ -60,7 +60,7 @@ class ProductItem extends StatelessWidget {
                 '200 FCFA',
                 style: TextStyle(fontSize: 12.0, color: AppColors.lightGrey),
               ),
-              Container(
+              SizedBox(
                 width: double.maxFinite,
                 height: 30.0,
                 // color: Colors.red,

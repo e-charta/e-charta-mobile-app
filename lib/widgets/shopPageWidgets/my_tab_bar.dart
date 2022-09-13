@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../helper/colors.dart';
-import '../widgets/product_item.dart';
+import '../../helper/colors.dart';
+import './product_item.dart';
 
 class MyTabBar extends StatefulWidget {
   const MyTabBar({Key? key}) : super(key: key);
@@ -17,7 +17,7 @@ class _MyTabBarState extends State<MyTabBar> with TickerProviderStateMixin {
     TabController _tabController = TabController(length: 2, vsync: this);
     return Column(
       children: [
-        Container(
+        SizedBox(
           child: Align(
             alignment: Alignment.centerLeft,
             child: TabBar(
@@ -36,7 +36,7 @@ class _MyTabBarState extends State<MyTabBar> with TickerProviderStateMixin {
             ),
           ),
         ),
-        Container(
+        SizedBox(
           height: 190.0,
           width: double.maxFinite,
           child: TabBarView(

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/shopping_cart.dart';
+import '../widgets/shopPageWidgets/shopping_cart.dart';
 import '../helper/colors.dart';
-import '../widgets/my_tab_bar.dart';
+import '../widgets/shopPageWidgets/my_tab_bar.dart';
 import '../widgets/my_button.dart';
-import '../widgets/quantity_modifier.dart';
-import '../widgets/product_description.dart';
+import '../widgets/shopPageWidgets/quantity_modifier.dart';
+import '../widgets/shopPageWidgets/product_description.dart';
 
 class ProductDetailPage extends StatefulWidget {
   const ProductDetailPage({Key? key}) : super(key: key);

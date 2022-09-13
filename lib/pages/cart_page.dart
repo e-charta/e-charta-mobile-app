@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/cart_items.dart';
+import '../widgets/shopPageWidgets/cart_items.dart';
 import '../helper/colors.dart';
 import '../widgets/my_button.dart';
 import '../widgets/custom_app_bar.dart';
@@ -18,12 +18,19 @@ class CartPage extends StatelessWidget {
           CustomAppBar(appBarText: 'Mon Panier', callback: goToPreviousPage),
       body: Column(
         children: [
-          const CartItems(),
+          SizedBox(
+            width: double.maxFinite,
+            height: (MediaQuery.of(context).size.height -
+                    MediaQuery.of(context).padding.top -
+                    kToolbarHeight) *
+                0.75,
+            child: const CartItems(),
+          ),
           Container(
             height: (MediaQuery.of(context).size.height -
                     MediaQuery.of(context).padding.top -
                     kToolbarHeight) *
-                0.2,
+                0.25,
             width: double.maxFinite,
             decoration: BoxDecoration(
                 color: AppColors.lighterGrey,
@@ -60,7 +67,7 @@ class CartPage extends StatelessWidget {
                 ],
               ),
               const SizedBox(
-                height: 10.0,
+                height: 20.0,
               ),
               MyButton(
                 buttonText: 'Vérifier',

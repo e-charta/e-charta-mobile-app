@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 import './helper/colors.dart';
-// import '../pages/product_detail_page.dart';
 // import './pages/main_page.dart';
+// import '../pages/product_detail_page.dart';
 // import './pages/onboarding_page.dart';
 // import './pages/cart_page.dart';
-import './pages/place_order_page.dart';
+// import './pages/place_order_page.dart';
+// import './pages/product_history_page.dart';
+import './pages/evaluate_agent_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -35,7 +37,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: const PlaceOrderPage(),
+      home: const EvaluateAgentPage(),
     );
   }
 }

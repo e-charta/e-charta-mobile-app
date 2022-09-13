@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../helper/colors.dart';
+import '../../helper/colors.dart';
 
 class QuantityModifier extends StatefulWidget {
   const QuantityModifier({Key? key}) : super(key: key);

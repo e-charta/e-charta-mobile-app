@@ -5,7 +5,8 @@ import '../helper/colors.dart';
 class MyButton extends StatelessWidget {
   final String buttonText;
   final VoidCallback callBack;
-  const MyButton({required this.buttonText, required this.callBack});
+  const MyButton({Key? key, required this.buttonText, required this.callBack})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

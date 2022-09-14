@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../helper/colors.dart';
 import '../../widgets/my_button.dart';
+import '../../widgets/custom_text_field.dart';
 
 class PickupPage extends StatefulWidget {
   const PickupPage({Key? key}) : super(key: key);
@@ -11,11 +13,22 @@ class PickupPage extends StatefulWidget {
 }
 
 class _PickupPageState extends State<PickupPage> {
+  final TextEditingController _dateFieldController = TextEditingController();
+  final TextEditingController _timeFieldController = TextEditingController();
+  final TextEditingController _telephoneFieldController =
+      TextEditingController();
+  final TextEditingController _locationFieldController =
+      TextEditingController();
+  final TextEditingController _quantityFieldController =
+      TextEditingController();
+  int quantity = 0;
+  double price = 0;
+  String? _dropdownValue;
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double statusBar = MediaQuery.of(context).padding.top;
-    String? _dropdownValue;
 
     void dropdownCallBack(String? selectedValue) {
       if (selectedValue is String) {
@@ -25,7 +38,122 @@ class _PickupPageState extends State<PickupPage> {
       }
     }
 
-    void openPage() {}
+    void _openPage() {
+      print('Type: $_dropdownValue');
+      print('Date: $_dateFieldController');
+      print('Time: $_timeFieldController');
+      print('Telephone: $_telephoneFieldController');
+      print('Location: $_locationFieldController');
+      print('Quatity: $_quantityFieldController');
+      print('Price: $price');
+    }
+
+    void _showDatePicker(BuildContext context) async {
+      await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime.now(),
+        lastDate: DateTime(2023),
+      ).then((pickedDate) {
+        if (pickedDate == null) {
+          return;
+        }
+        setState(() {
+          _dateFieldController.text =
+              DateFormat('EEE, dd-MM-yyyy').format(pickedDate);
+        });
+      });
+    }
+
+    void _showTimePicker(BuildContext context) async {
+      await showTimePicker(
+        context: context,
+        initialTime: const TimeOfDay(hour: 0, minute: 0),
+      ).then((pickedTime) {
+        if (pickedTime == null) {
+          return;
+        }
+        setState(() {
+          _timeFieldController.text =
+              '${pickedTime.hour.toString().padLeft(2, '0')} : ${pickedTime.minute.toString().padLeft(2, '0')}';
+        });
+      });
+    }
+
+    void calculatePrice() {
+      setState(() {
+        price = quantity * 25;
+      });
+    }
+
+    void addWastePaperQuatity() {
+      setState(() {
+        quantity++;
+        _quantityFieldController.text = quantity.toString();
+        calculatePrice();
+      });
+    }
+
+    void reduceWastePaperQuatity() {
+      if (quantity > 0) {
+        quantity--;
+        setState(() {
+          _quantityFieldController.text = quantity.toString();
+          calculatePrice();
+        });
+      }
+    }
+
+    void showAlertDialogBox(BuildContext context) async {
+      return showDialog(
+          context: context,
+          builder: (context) {
+            return GestureDetector(
+              onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+              child: AlertDialog(
+                title: const Text(
+                  "Choisissez la date et l'heur souhaitées",
+                  style: TextStyle(fontSize: 12.0, color: AppColors.lightGrey),
+                ),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    CustomTextField(
+                      editingController: _dateFieldController,
+                      icon: Icons.date_range,
+                      lableText: 'Date de ramassage',
+                      isTap: true,
+                      isReadOnly: true,
+                      inputType: TextInputType.number,
+                      openPicker: () => _showDatePicker(context),
+                    ),
+                    const SizedBox(
+                      height: 10.0,
+                    ),
+                    CustomTextField(
+                      editingController: _timeFieldController,
+                      icon: Icons.alarm,
+                      lableText: 'Heure de ramassage',
+                      isTap: true,
+                      isReadOnly: true,
+                      inputType: TextInputType.number,
+                      openPicker: () => _showTimePicker(context),
+                    ),
+                  ],
+                ),
+                actions: <Widget>[
+                  SizedBox(
+                    width: double.maxFinite,
+                    child: MyButton(
+                      buttonText: 'Planifier le ramassage',
+                      callBack: _openPage,
+                    ),
+                  )
+                ],
+              ),
+            );
+          });
+    }
 
     final typeOfWasteTextField = DropdownButtonFormField(
       items: const [
@@ -54,66 +182,6 @@ class _PickupPageState extends State<PickupPage> {
         floatingLabelBehavior: FloatingLabelBehavior.never,
         prefixIcon: const Icon(
           Icons.menu_rounded,
-          color: AppColors.secondaryColor,
-          size: 16.0,
-        ),
-        filled: true,
-        fillColor: AppColors.lighterGrey,
-        enabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.transparent, width: 2.0),
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-              color: AppColors.mainColor.withOpacity(0.5), width: 2.0),
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-      ),
-    );
-
-    final telephoneTextField = TextField(
-      style: const TextStyle(fontSize: 12.0),
-      keyboardType: TextInputType.number,
-      cursorColor: AppColors.lightGrey,
-      decoration: InputDecoration(
-        labelText: 'Téléphone',
-        labelStyle: TextStyle(
-          color: Colors.black.withOpacity(0.3),
-          fontSize: 12.0,
-        ),
-        floatingLabelBehavior: FloatingLabelBehavior.never,
-        prefixIcon: const Icon(
-          Icons.phone,
-          color: AppColors.secondaryColor,
-          size: 16.0,
-        ),
-        filled: true,
-        fillColor: AppColors.lighterGrey,
-        enabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.transparent, width: 2.0),
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-              color: AppColors.mainColor.withOpacity(0.5), width: 2.0),
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-      ),
-    );
-
-    final locationTextField = TextField(
-      style: const TextStyle(fontSize: 12.0),
-      keyboardType: TextInputType.text,
-      cursorColor: AppColors.lightGrey,
-      decoration: InputDecoration(
-        labelText: 'Votre emplacement',
-        labelStyle: TextStyle(
-          color: Colors.black.withOpacity(0.3),
-          fontSize: 12.0,
-        ),
-        floatingLabelBehavior: FloatingLabelBehavior.never,
-        prefixIcon: const Icon(
-          Icons.place,
           color: AppColors.secondaryColor,
           size: 16.0,
         ),
@@ -211,8 +279,18 @@ class _PickupPageState extends State<PickupPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       typeOfWasteTextField,
-                      telephoneTextField,
-                      locationTextField,
+                      CustomTextField(
+                        editingController: _telephoneFieldController,
+                        icon: Icons.phone,
+                        lableText: 'Téléphone',
+                        inputType: TextInputType.number,
+                      ),
+                      CustomTextField(
+                        editingController: _locationFieldController,
+                        icon: Icons.place,
+                        lableText: 'Votre emplacement',
+                        inputType: TextInputType.text,
+                      ),
                     ],
                   ),
                 ),
@@ -244,7 +322,7 @@ class _PickupPageState extends State<PickupPage> {
                       children: [
                         ElevatedButton(
                           onPressed:
-                              () {}, // TODO: when the button is pressed it's should decrease the quatity
+                              reduceWastePaperQuatity, // TODO: when the button is pressed it's should decrease the quatity
                           child: const Text(
                             '-',
                             style: TextStyle(color: AppColors.secondaryColor),
@@ -262,6 +340,7 @@ class _PickupPageState extends State<PickupPage> {
                           width: 60.0,
                           padding: const EdgeInsets.symmetric(horizontal: 2.0),
                           child: TextField(
+                            controller: _quantityFieldController,
                             textAlign: TextAlign.center,
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
@@ -280,7 +359,7 @@ class _PickupPageState extends State<PickupPage> {
                         ),
                         ElevatedButton(
                           onPressed:
-                              () {}, // TODO: when the button is pressed it's should increase the quatity
+                              addWastePaperQuatity, // TODO: when the button is pressed it's should increase the quatity
                           child: const Text('+'),
                           style: ElevatedButton.styleFrom(
                             minimumSize: const Size.square(25.0),
@@ -323,22 +402,24 @@ class _PickupPageState extends State<PickupPage> {
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Text(
+                      children: [
+                        const Text(
                           'Prix',
                           style: TextStyle(color: AppColors.lightGrey),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10.0,
                         ),
                         Text(
-                          '0.0 FCFA',
-                          style: TextStyle(
+                          '$price FCFA',
+                          style: const TextStyle(
                               fontSize: 20.0, color: AppColors.secondaryColor),
                         ),
                       ],
                     ),
-                    MyButton(buttonText: 'Ramasser', callBack: openPage),
+                    MyButton(
+                        buttonText: 'Ramasser',
+                        callBack: () => showAlertDialogBox(context)),
                   ],
                 ),
               ),

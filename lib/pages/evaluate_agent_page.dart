@@ -34,7 +34,7 @@ class EvaluateAgentPage extends StatelessWidget {
                       offset: const Offset(0, 0),
                     )
                   ]),
-              child: EvaluateIndividualAgent(),
+              child: const EvaluateIndividualAgent(),
             );
           }),
     );

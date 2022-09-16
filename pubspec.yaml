@@ -36,6 +36,7 @@ dependencies:
   flutter_svg: ^1.1.4
   smooth_page_indicator: ^1.0.0+2
   intl: ^0.17.0
+  percent_indicator: ^4.2.2
 
 dev_dependencies:
   flutter_test:
@@ -83,6 +84,10 @@ flutter:
     - assets/images/paper-envelope.jpg
     - assets/images/piza-paper-box.jpg
     - assets/images/Orange-Money-Logo.png
+    - assets/images/facebook-remove.png
+    - assets/images/Instagram.png
+    - assets/images/LinkedIn.png
+    - assets/images/Twitter.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

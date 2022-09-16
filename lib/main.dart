@@ -8,6 +8,8 @@ import './pages/main_page.dart';
 // import './pages/place_order_page.dart';
 // import './pages/product_history_page.dart';
 // import './pages/evaluate_agent_page.dart';
+// import './pages/calendar_page.dart';
+// import './pages/withdraw_money_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -37,7 +39,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: const MainPage(),
+      home: MainPage(),
     );
   }
 }

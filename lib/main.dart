@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import './helper/colors.dart';
-import './pages/main_page.dart';
+// import './pages/main_page.dart';
 // import '../pages/product_detail_page.dart';
 // import './pages/onboarding_page.dart';
 // import './pages/cart_page.dart';
@@ -10,6 +10,7 @@ import './pages/main_page.dart';
 // import './pages/evaluate_agent_page.dart';
 // import './pages/calendar_page.dart';
 // import './pages/withdraw_money_page.dart';
+import './pages/login_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: MainPage(),
+      home: LoginPage(),
     );
   }
 }

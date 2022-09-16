@@ -91,8 +91,8 @@ class AccountPage extends StatelessWidget {
               width: double.infinity,
               color: Colors.red,
               child: Column(
-                children: [
-                  const Text(
+                children: const [
+                  Text(
                     'Des médias sociaux',
                     style: TextStyle(color: AppColors.lightGrey),
                   ),

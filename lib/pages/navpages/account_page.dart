@@ -20,10 +20,10 @@ class AccountPage extends StatelessWidget {
     ];
 
     List<Map<String, String>> socialMedias = [
-      {'linkedin': 'assets/images/LinkedIn.png'},
-      {'Facebook': 'assets/images/facebook-remove.png'},
-      {'Instagram': 'assets/images/Instagram.png'},
-      {'Twitter': 'assets/images/Twitter.png'},
+      {'socialMediaName': 'linkedin', 'image': 'assets/images/LinkedIn.png'},
+      {'socialMediaName': 'Facebook', 'image': 'assets/images/Facebook.png'},
+      {'socialMediaName': 'Instagram', 'image': 'assets/images/Instagram.png'},
+      {'socialMediaName': 'Twitter', 'image': 'assets/images/Twitter.png'},
     ];
 
     void openPage() {}
@@ -79,33 +79,60 @@ class AccountPage extends StatelessWidget {
               ),
             ),
             Container(
+              alignment: Alignment.bottomLeft,
+              padding: const EdgeInsets.only(left: 20.0),
               height: (height -
                       statusBar -
                       kToolbarHeight -
                       kBottomNavigationBarHeight) *
-                  0.44,
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20.0,
-                vertical: 20.0,
+                  0.06,
+              child: const Text(
+                'Des médias sociaux',
+                style: TextStyle(fontSize: 12.0, color: AppColors.lightGrey),
               ),
-              width: double.infinity,
-              color: Colors.red,
-              child: Column(
-                children: const [
-                  Text(
-                    'Des médias sociaux',
-                    style: TextStyle(color: AppColors.lightGrey),
-                  ),
-                  // Container(
-                  //   color: Colors.blue,
-                  //   width: double.maxFinite,
-                  //   child: ListView.builder(itemBuilder: (context, index) {
-                  //     return Container();
-                  //   }),
-                  // )
-                ],
-              ),
-            )
+            ),
+            Container(
+                height: (height -
+                        statusBar -
+                        kToolbarHeight -
+                        kBottomNavigationBarHeight) *
+                    0.38,
+                padding: const EdgeInsets.symmetric(),
+                width: double.infinity,
+                child: ListView.builder(
+                    itemCount: socialMedias.length,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        width: double.maxFinite,
+                        height: 50.0,
+                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                        child: TextButton(
+                          onPressed: () {},
+                          child: Row(
+                            children: [
+                              Container(
+                                width: 40.0,
+                                margin: const EdgeInsets.only(right: 15.0),
+                                height: double.maxFinite,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      image: AssetImage(
+                                          '${socialMedias[index]['image']}'),
+                                      fit: BoxFit.cover),
+                                ),
+                              ),
+                              Text(
+                                '${socialMedias[index]['socialMediaName']}',
+                                style: TextStyle(
+                                  fontSize: 13.0,
+                                  color: Colors.black.withOpacity(0.8),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    }))
           ],
         ));
   }

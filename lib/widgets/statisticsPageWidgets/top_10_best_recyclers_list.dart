@@ -7,7 +7,7 @@ class Top10BestRecyclersList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 100.0,
       child: ListView.builder(
           scrollDirection: Axis.horizontal,

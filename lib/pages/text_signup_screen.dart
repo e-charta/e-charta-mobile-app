@@ -1,52 +1,44 @@
-import 'package:echarta/pages/text_signup_screen.dart';
-import 'package:echarta/services/auth_repository.dart';
+import 'package:echarta/cubit/signup/signup_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../widgets/custom_app_bar.dart';
-import '../widgets/custom_text_field.dart';
-import '../helper/colors.dart';
-import '../widgets/my_button.dart';
 import '../cubit/login/login_cubit.dart';
+import '../services/auth_repository.dart';
+import '../helper/colors.dart';
 
-class LoginPage extends StatelessWidget {
-  LoginPage({Key? key}) : super(key: key);
-
-  static Page page() => MaterialPage<void>(child: LoginPage());
+class TextSignupScreen extends StatelessWidget {
+  const TextSignupScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    void backToPreviousPage() {}
-
     return Scaffold(
-      appBar:
-          CustomAppBar(appBarText: 'Connexion', callback: backToPreviousPage),
+      appBar: AppBar(),
       body: GestureDetector(
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: SingleChildScrollView(
-            child: BlocProvider<LoginCubit>(
-          create: (_) => LoginCubit(
+            child: BlocProvider<SignupCubit>(
+          create: (_) => SignupCubit(
             context.read<AuthRepository>(),
           ),
-          child: LoginSceen(),
+          child: SignupSceen(),
         )),
       ),
     );
   }
 }
 
-class LoginSceen extends StatelessWidget {
+class SignupSceen extends StatelessWidget {
   final TextEditingController _emailFieldController = TextEditingController();
   final TextEditingController _passwordFieldController =
       TextEditingController();
-  LoginSceen({Key? key}) : super(key: key);
+  SignupSceen({Key? key}) : super(key: key);
   void openPage() {}
 
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double statusBar = MediaQuery.of(context).padding.top;
-    return BlocListener<LoginCubit, LoginState>(
+    return BlocListener<SignupCubit, SignupState>(
       listener: (context, state) {
         if (state.status == LoginStatus.error) {
           // Do something if there is an error.
@@ -68,13 +60,13 @@ class LoginSceen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                BlocBuilder<LoginCubit, LoginState>(
+                BlocBuilder<SignupCubit, SignupState>(
                   buildWhen: (previous, current) =>
                       previous.email != current.email,
                   builder: (context, state) {
                     return TextField(
                       onChanged: (email) {
-                        context.read<LoginCubit>().emailChanged(email);
+                        context.read<SignupCubit>().emailChanged(email);
                       },
                       decoration: InputDecoration(
                         labelText: 'email',
@@ -108,13 +100,14 @@ class LoginSceen extends StatelessWidget {
                 const SizedBox(
                   height: 20.0,
                 ),
-                BlocBuilder<LoginCubit, LoginState>(
+                BlocBuilder<SignupCubit, SignupState>(
                   buildWhen: (previous, current) =>
                       previous.password != current.password,
                   builder: (context, state) {
                     return TextField(
+                      obscureText: true,
                       onChanged: (password) {
-                        context.read<LoginCubit>().emailChanged(password);
+                        context.read<SignupCubit>().emailChanged(password);
                       },
                       decoration: InputDecoration(
                         labelText: 'Password',
@@ -148,7 +141,7 @@ class LoginSceen extends StatelessWidget {
                 const SizedBox(
                   height: 20.0,
                 ),
-                BlocBuilder<LoginCubit, LoginState>(
+                BlocBuilder<SignupCubit, SignupState>(
                   buildWhen: (previous, current) =>
                       previous.status != current.status,
                   builder: (context, state) {
@@ -159,76 +152,12 @@ class LoginSceen extends StatelessWidget {
                               fixedSize: const Size(200, 40),
                             ),
                             onPressed: () {
-                              context.read<LoginCubit>().loginWithCredentials();
+                              context.read<SignupCubit>().sigupFormSubmitted();
                             },
-                            child: const Text('Login'),
+                            child: const Text('Signup'),
                           );
                   },
                 ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    fixedSize: const Size(200, 40),
-                  ),
-                  onPressed: () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (BuildContext context) =>
-                          const TextSignupScreen(),
-                    ),
-                  ),
-                  child: const Text('signup'),
-                ),
-                //       const SizedBox(
-                //         height: 20.0,
-                //       ),
-                //       CustomTextField(
-                //         editingController: _passwordFieldController,
-                //         icon: Icons.key,
-                //         inputType: TextInputType.visiblePassword,
-                //         lableText: 'Mot de passe',
-                //       ),
-                //       TextButton(
-                //         onPressed: () {},
-                //         child: const Text(
-                //           'Mot de passe oublié ?',
-                //           style: TextStyle(color: AppColors.mainColor),
-                //         ),
-                //       )
-                //     ],
-                //   ),
-                // ),
-                // SizedBox(
-                //   height: (height - statusBar - kToolbarHeight) * 0.3,
-                //   child: Column(
-                //     children: [
-                //       Container(
-                //         width: double.maxFinite,
-                //         height: 50.0,
-                //         margin:
-                //             const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
-                //         child: MyButton(buttonText: 'Connexion', callBack: openPage),
-                //       ),
-                //       const SizedBox(
-                //         height: 5.0,
-                //       ),
-                //       Row(
-                //         mainAxisAlignment: MainAxisAlignment.center,
-                //         children: [
-                //           const Text(
-                //             "vous n'avez pas de compte ?",
-                //             style: TextStyle(fontSize: 10.0),
-                //           ),
-                //           TextButton(
-                //             onPressed: () {},
-                //             child: const Text(
-                //               'Créer un compte',
-                //               style: TextStyle(
-                //                 color: AppColors.mainColor,
-                //                 fontSize: 10.0,
-                //               ),
-                //             ),
-                //           ),
-                //         ],
-                //       )
               ],
             ),
           )

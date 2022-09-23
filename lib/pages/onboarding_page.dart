@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../widgets/welcome_page.dart';
-import 'navpages/shop_page.dart';
+import '../bloc/app_cubit.dart';
+import '../services/get_data.dart';
+
+// () => _pageController.nextPage(
+//                         duration: const Duration(milliseconds: 500),
+//                         curve: Curves.easeInOut)
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({Key? key}) : super(key: key);
@@ -38,7 +44,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
               WelcomePage(
                 imageUrl: 'assets/images/onboarding-screen3.png',
                 description:
-                    'Profitez de nos produits faits à base de papiers recyclés',
+                    'Profitez de produits fait à base de papiers recyclés',
               ),
             ],
           ),
@@ -53,7 +59,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 radius: 4.0,
                 dotWidth: 80.0,
                 dotHeight: 8.0,
-                // paintStyle: PaintingStyle.stroke,
                 strokeWidth: 1.5,
                 dotColor: Colors.grey.withOpacity(0.3),
                 activeDotColor: Theme.of(context).primaryColor,
@@ -67,13 +72,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
               padding: const EdgeInsets.symmetric(horizontal: 50.0),
               child: ElevatedButton(
                 onPressed: isLastPage
-                    ? () => Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(
-                              builder: (context) => const ShopPage()),
-                        )
-                    : () => _pageController.nextPage(
-                        duration: const Duration(milliseconds: 500),
-                        curve: Curves.easeInOut),
+                    ? () => BlocProvider.of<AppCubit>(context).getData()
+                    : () => GetData().getProductData(),
                 child: isLastPage
                     ? const Text(
                         'Commencer',

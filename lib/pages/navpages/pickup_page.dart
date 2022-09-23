@@ -1,9 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../../helper/colors.dart';
 import '../../widgets/my_button.dart';
 import '../../widgets/custom_text_field.dart';
+import '../../services/get_data.dart';
 
 class PickupPage extends StatefulWidget {
   const PickupPage({Key? key}) : super(key: key);
@@ -13,6 +16,8 @@ class PickupPage extends StatefulWidget {
 }
 
 class _PickupPageState extends State<PickupPage> {
+  final database = FirebaseDatabase.instance.ref();
+
   final TextEditingController _dateFieldController = TextEditingController();
   final TextEditingController _timeFieldController = TextEditingController();
   final TextEditingController _telephoneFieldController =
@@ -27,6 +32,8 @@ class _PickupPageState extends State<PickupPage> {
 
   @override
   Widget build(BuildContext context) {
+    final dailySpecial = database.child('michel/');
+
     double height = MediaQuery.of(context).size.height;
     double statusBar = MediaQuery.of(context).padding.top;
 
@@ -38,15 +45,27 @@ class _PickupPageState extends State<PickupPage> {
       }
     }
 
-    void _openPage() {
-      print('Type: $_dropdownValue');
-      print('Date: $_dateFieldController');
-      print('Time: $_timeFieldController');
-      print('Telephone: $_telephoneFieldController');
-      print('Location: $_locationFieldController');
-      print('Quatity: $_quantityFieldController');
-      print('Price: $price');
+    // void _openPage() {
+    // print('tapped');
+    Future<void> createUser() async {
+      print('tapped');
+      final docUser =
+          FirebaseFirestore.instance.collection('users').doc('test-user');
+      final json = {'Name': 'Michel', 'age': 32, 'sex': 'male'};
+      await docUser.set(json);
     }
+
+    // }
+
+    // void setData() async {
+    //   try {
+    //     await dailySpecial
+    //         .set({'Name': 'Michel', 'age': 32, 'sex': 'male'}).then(
+    //             (value) => print('data added'));
+    //   } catch (e) {
+    //     print(e);
+    //   }
+    // }
 
     void _showDatePicker(BuildContext context) async {
       await showDatePicker(
@@ -146,7 +165,7 @@ class _PickupPageState extends State<PickupPage> {
                     width: double.maxFinite,
                     child: MyButton(
                       buttonText: 'Planifier le ramassage',
-                      callBack: _openPage,
+                      callBack: createUser,
                     ),
                   )
                 ],

@@ -1,23 +1,52 @@
+import 'package:echarta/bloc/auth/auth_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flow_builder/flow_builder.dart';
+// import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import './helper/colors.dart';
+import './services/auth_repository.dart';
+import './services/routs.dart';
+import 'bloc/auth/bloc_observer.dart';
+// import 'bloc/app_cubit.dart';
+// import './bloc/app_cubit_logics.dart';
+// import 'services/get_data.dart';
+// import './pages/notification_page.dart';
+// import './pages/login_page.dart';
 // import './pages/main_page.dart';
-// import '../pages/product_detail_page.dart';
-// import './pages/onboarding_page.dart';
-// import './pages/cart_page.dart';
-// import './pages/place_order_page.dart';
-// import './pages/product_history_page.dart';
-// import './pages/evaluate_agent_page.dart';
-// import './pages/calendar_page.dart';
-// import './pages/withdraw_money_page.dart';
-import './pages/login_page.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  return BlocOverrides.runZoned(() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    await Firebase.initializeApp();
+    final authRepository = AuthRepository();
+    runApp(MyApp(authRepository: authRepository));
+  }, blocObserver: AppBlocObserver());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  final AuthRepository _authRepository;
+  const MyApp({
+    Key? key,
+    required AuthRepository authRepository,
+  })  : _authRepository = authRepository,
+        super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return RepositoryProvider.value(
+      value: _authRepository,
+      child: BlocProvider(
+        create: (context) => AuthBloc(authRepository: _authRepository),
+        child: const AppView(),
+      ),
+    );
+  }
+}
+
+class AppView extends StatelessWidget {
+  const AppView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +69,14 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: LoginPage(),
+      home: FlowBuilder(
+        state: context.select((AuthBloc bloc) => bloc.state.status),
+        onGeneratePages: onGenerateAppViewPages,
+      ),
+      // home: BlocProvider(
+      //   create: (context) => AppCubit(data: GetData()),
+      //   child: AppCubitLogics(),
+      // ),
     );
   }
 }

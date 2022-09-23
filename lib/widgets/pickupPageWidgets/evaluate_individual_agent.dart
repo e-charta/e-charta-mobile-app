@@ -13,8 +13,8 @@ class EvaluateIndividualAgent extends StatelessWidget {
     int gottenStars = 4;
 
     void openPage() {
-      print('Comment: ${_commentEditingController.text}');
-      print('Star: $gottenStars');
+      // print('Comment: ${_commentEditingController.text}');
+      // print('Star: $gottenStars');
     }
 
     void showAlertDialogBox(BuildContext context) async {

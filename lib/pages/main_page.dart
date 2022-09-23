@@ -8,6 +8,7 @@ import '../helper/colors.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
+  static Page page() => const MaterialPage<void>(child: MainPage());
 
   @override
   State<MainPage> createState() => _MainPageState();

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "852971678124",
+    "project_id": "e-charta",
+    "storage_bucket": "e-charta.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:852971678124:android:c1933570a49a92fbe13209",
+        "android_client_info": {
+          "package_name": "com.example.echarta"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "852971678124-j443cs55qvr26g7bgenpqeccemdlti9i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCX6wOnqkHwpwtyR-ZSqQigsdh77ZZUeJo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "852971678124-j443cs55qvr26g7bgenpqeccemdlti9i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
